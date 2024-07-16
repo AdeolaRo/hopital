@@ -22,7 +22,7 @@ public class ConsultationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long patientId = Long.parseLong(request.getParameter("patientId"));
-        Patient patient = patientDAO.find(patientId);
+        Patient patient = patientDAO.findById(patientId);
 
         String dateConsultationStr = request.getParameter("dateConsultation");
         String nomMedecin = request.getParameter("nomMedecin");

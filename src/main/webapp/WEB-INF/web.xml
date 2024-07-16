@@ -3,4 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+
+    <servlet>
+        <servlet-name>ListPatientsServlet</servlet-name>
+        <servlet-class>org.example.hopital.controller.ListePatientsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListPatientsServlet</servlet-name>
+        <url-pattern>/listPatients</url-pattern>
+    </servlet-mapping>
+
 </web-app>
+
+

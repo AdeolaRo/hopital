@@ -16,7 +16,7 @@ public class PatientDetailsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long patientId = Long.parseLong(request.getParameter("id"));
-        Patient patient = patientDAO.find(patientId);
+        Patient patient = patientDAO.findById(patientId);
         request.setAttribute("patient", patient);
         request.getRequestDispatcher("/WEB-INF/views/patientDetails.jsp").forward(request, response);
     }

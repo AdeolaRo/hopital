@@ -9,11 +9,14 @@ import java.util.List;
 public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="CONSULTATION_ID")
     private Long id;
 
     @Temporal(TemporalType.DATE)
     private Date dateConsultation;
+    @Column(name="NOM_MEDECIN")
     private String nomMedecin;
+    @Column(name="PRESCRIPTION")
     private String prescription;
 
     @ManyToOne

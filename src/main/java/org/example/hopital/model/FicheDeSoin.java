@@ -9,8 +9,10 @@ import jakarta.persistence.*;
 public class FicheDeSoin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="FICHE_SOIN_ID")
     private Long id;
 
+    @Column(name="CONTENU")
     private String contenu;
 
     @ManyToOne

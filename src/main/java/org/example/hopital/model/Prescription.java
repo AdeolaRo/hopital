@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="PRESCRIPTION_ID")
     private Long id;
 
     private String contenu;

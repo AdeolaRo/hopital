@@ -1,28 +1,25 @@
 package org.example.hopital.util;
 
+import lombok.Getter;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-    public class HibernateUtil {
-        private static final SessionFactory sessionFactory = buildSessionFactory();
 
-        private static SessionFactory buildSessionFactory() {
-            try {
-                return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-            } catch (Throwable ex) {
-                System.err.println("Initial SessionFactory creation failed." + ex);
-                throw new ExceptionInInitializerError(ex);
-            }
-        }
+public class HibernateUtil {
+    @Getter
+    private static StandardServiceRegistry serviceRegistry;
+    private static SessionFactory sessionFactory;
 
-        public static SessionFactory getSessionFactory() {
-            return sessionFactory;
-        }
-
-        public static void shutdown() {
-            getSessionFactory().close();
-        }
+    public static SessionFactory getSessionFactory() {
+        serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
+        sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
+        return sessionFactory;
     }
+}
+
+
 
 
 

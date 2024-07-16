@@ -27,14 +27,14 @@ public class Patient {
     @Column(name= "DOB")
     LocalDate birthDate;
     @Column(name= "IMAGE")
-    String file;
+    String photo;
 
 
-    public Patient(String name, String phone, LocalDate birthDate, String file) {
+    public Patient(String name, String phone, LocalDate birthDate, String photo) {
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.file = file;
+        this.photo = photo;
     }
 
 

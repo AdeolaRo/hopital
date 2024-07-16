@@ -5,57 +5,52 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.hopital.model.Patient;
 import org.example.hopital.dao.PatientDAO;
-
+import org.example.hopital.model.Patient;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("/Patient")
+@WebServlet("/patient")
 public class PatientServlet extends HttpServlet {
-    PatientDAO patientDAO;
+    private final PatientDAO patientDAO = new PatientDAO();
 
     @Override
-    public void init() throws ServletException {
-        patientDAO = new PatientDAO();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("_method");
+        if ("delete".equals(action)) {
+            Long id = Long.parseLong(req.getParameter("id"));
+            patientDAO.delete(id);
+        } else {
+            String id = req.getParameter("id");
+            String name = req.getParameter("name");
+            String phone = req.getParameter("phone");
+            String birthDate = req.getParameter("birthDate");
+            String photo = req.getParameter("photo");
+
+            Patient patient = new Patient();
+            if (id != null && !id.isEmpty()) {
+                patient.setId(Long.parseLong(id));
+            }
+            patient.setName(name);
+            patient.setPhone(phone);
+            patient.setBirthDate(LocalDate.parse(birthDate));
+            patient.setPhoto(photo);
+
+            if (id == null || id.isEmpty()) {
+                patientDAO.save(patient);
+            } else {
+                patientDAO.update(patient);
+            }
+        }
+        resp.sendRedirect("listPatients");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/listpatient.jsp").forward(req, resp);
+        Long id = Long.parseLong(req.getParameter("id"));
+        Patient patient = patientDAO.findById(id);
+        req.setAttribute("patient", patient);
+        req.getRequestDispatcher("/WEB-INF/views/editPatient.jsp").forward(req, resp);
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String method = request.getParameter("_method");
-        if (method == null) {
-            method = "post";
-        }
-
-        switch (method.toLowerCase()) {
-            case "put":
-                doPut(request, response);
-                break;
-            case "delete":
-                doDelete(request, response);
-                break;
-            default:
-                String name = request.getParameter("name");
-                String phone = request.getParameter("phone");
-                String dob = request.getParameter("dob");
-
-                Patient patient = new Patient();
-                patient.setName(name);
-                patient.setPhone(phone);
-                patient.setBirthDate(LocalDate.parse(dob));
-                patient.setFile("file");
-
-                patientDAO.create(patient);
-
-                response.sendRedirect("listPatients");
-        }
-
-        }
-    }
-
+}

@@ -12,7 +12,7 @@
 <h1>Bienvenue à l'Hôpital</h1>
 <br/>
 <a href="index.jsp">Acceuil</a>
-<a href="connexion.jsp">Liste des Patients</a>
+<a href="login.jsp">Liste des Patients</a>
 </head>
 <main>
 

@@ -11,20 +11,19 @@ import java.io.IOException;
 
 
 
-@WebServlet(name = "checkSessionServlet",value = "/have-session")
+@WebServlet(name = "CheckSessionServlet", value = "/have-session")
 public class CheckSessionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession session = req.getSession();
+        Boolean logged = (Boolean) session.getAttribute("isLogged");
 
-        boolean logged = (session.getAttribute("isLogged")!= null) ? (boolean) session.getAttribute("isLogged") : false;
-
-        if(!logged){
-           resp.sendRedirect("connexion.jsp");
-        }else {
-            resp.sendRedirect("listPatients.jsp");
+        if (logged != null && logged) {
+            resp.sendRedirect("list.jsp");
+        } else {
+            resp.sendRedirect("login.jsp");
         }
     }
 }
+
