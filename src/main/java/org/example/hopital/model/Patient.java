@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@MultipartConfig(maxFileSize = 1024*1024*10) // Limite de 10 MB (10 mégaoctets) pour chaque fichier
-
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

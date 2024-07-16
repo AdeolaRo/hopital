@@ -2,35 +2,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>Create Patient</title>
+    <title>Ajouter un Patient</title>
     <%@include file="WEB-INF/bootstrapImport.html" %>
-
 </head>
 <body>
-
 <div class="container">
-
-    <h2>Créer un Patient</h2>
+    <h1 class="mt-5">Ajouter un Patient</h1>
     <form action="createPatient" method="post">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" required><br>
-
-        <label for="prenom">Prénom:</label>
-        <input type="text" id="prenom" name="prenom" required><br>
-
-        <label for="dateNaissance">Date de naissance:</label>
-        <input type="date" id="dateNaissance" name="dateNaissance" required><br>
-
-        <label for="photo">Photo:</label>
-        <input type="text" id="photo" name="photo"><br>
-
-        <input type="submit" value="Create">
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+       <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Date de Naissance</label>
+            <input type="date" class="form-control" id="birthDate" name="birthDate" required>
+        </div>
+        <div class="form-group">
+            <label for="photo">Photo</label>
+            <input type="text" class="form-control" id="photo" name="photo">
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
-
-    <a href="patient-list">Back to list</a>
-
+    <a href="listPatients" class="btn btn-secondary mt-3">Retour à la liste</a>
 </div>
 </body>
 </html>
-
